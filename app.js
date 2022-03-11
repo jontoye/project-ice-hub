@@ -9,6 +9,9 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+// connect to database
+require('./config/database');
+
 const app = express();
 
 // view engine setup
