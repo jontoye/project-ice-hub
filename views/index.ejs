@@ -1,11 +1,64 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<div class="section-header">
+    <h1 class="display-1"><%= title %></h1>
+    <h2 class="">Hockey League Management System</h3>
+</div>
+
+<section class="section-main container">
+
+    <div class="row section-main__hero mb-5">
+        <div class="col-8 mx-auto">
+            <div class="d-flex flex-column justify-content-center align-items-center" style="height:400px">
+                <p class="display-6 text-center">The new standard for league management.</p>
+                <p class="lead">Check out our demo to see why.</p>
+        
+                <div class="d-flex gap-3">
+                    <button class="btn btn-primary btn-dark btn-lg">Register</button>
+                    <button class="btn btn-secondary btn-light btn-lg">Demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-main__events">
+        <div class="mb-3">
+            <h3 class="display-6">Events</h3>
+            <p class="lead">Whats going on</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="section-main__spotlight">
+        <div class="mb-3">
+            <h3 class="display-6">Player Spotlight</h3>
+            <p class="lead">Keep an eye out for these rising stars</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="section-main__news">
+        <div class="mb-3">
+            <h3 class="display-6">NHL News</h3>
+            <p class="lead">The latest updates from the NHL</p>  
+        </div>
+    
+        <% articles.forEach(article => { %>
+            <div class="card mb-3" >
+                <div class="row g-0">
+                    <div class="col-md-2 d-flex justify-content-center p-3">
+                    <img src="<%= article.Logo %> " class="img-fluid rounded-start" alt="Team Logo">
+                    </div>
+                    <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= article.Title %> </h5>
+                        <p class="card-text"><%= article.Content %> </p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+        <% }) %>
+    </div>
+
+</section>

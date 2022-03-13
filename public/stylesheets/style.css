@@ -1,8 +1,69 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+
+:root {
+	--navbar-width: 250px;
+	--header-height: 200px; 
 }
 
-a {
-  color: #00B7FF;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0 50px;
+	font: 14px "Poppins", Helvetica, Arial, sans-serif;
+	margin-left: var(--navbar-width);
+	margin-top: calc( var(--header-height) + 25px);
+}
+
+hr {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+h2 {
+	font-weight: 200;
+	letter-spacing: 2px;
+}
+
+.sidebar {
+	position: fixed;
+	left: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.section-main {
+	background-color: rgba(238, 238, 238, 0.329);
+}
+
+.section-header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 35px;
+	height: var(--header-height);
+	padding-top: 25px;
+	padding-left: 35px;
+}
+
+.section-header::after {
+	content: '';
+	display: block;
+	height: 2px;
+	width: 100%;
+	background-color: #555;
+}
+
+.section-main__hero {
+	background: linear-gradient(rgba(84, 107, 139, 0.7), rgba(84, 107, 139, 0.9)), url('../images/ice.jpeg');
+	background-size: cover;
+	background-position: center center;
+	color: #fff;
+}
+
+.section-main__news img {
+	width: 200px;
+	height: 200px;
 }
