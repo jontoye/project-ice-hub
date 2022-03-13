@@ -1,9 +1,22 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+
+const indexController = require('../controllers/indexController');
+
+// FOR Live Version
+// router.get('/', async (req, res) => {
+
+// 	try {
+// 		const results = await axios.get(apiURL + process.env.apiKEY);
+// 		res.render('index', { title: 'Ice Hub' , articles: results.data });
+// 	} catch (err) {
+// 		console.error(err);
+// 	}
+
+// });
+
+// FOR Test Version
+router.get('/', indexController.index);
 
 module.exports = router;

@@ -9,7 +9,7 @@ const TeamSchema = new Schema(
         name_short: { type: String, minLength: 3, maxLength: 3, requried: true },
         conference: { type: String, maxLength: 15, required: true },
         division: { type: String, maxLength: 15, required: true },
-        arena: { type: Schema.Types.ObjectId, ref: 'Arena' },
+        arena: { type: Schema.Types.ObjectId, ref: 'Arena', required: true },
         wins: { type: Number, default: 0 },
         losses: { type: Number, default: 0 },
         overtime_losses: { type: Number, default: 0 },

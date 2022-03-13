@@ -1,4 +1,4 @@
-const mongoose = requrie('mongoose');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PersonSchema = new Schema(
@@ -7,7 +7,7 @@ const PersonSchema = new Schema(
         last_name: { type: String, maxLength: 30, required: true },
         date_of_birth: { type: Date },
         place_of_birth: { type: String },
-        photo_url: { type: url },
+        photo_url: { type: String },
     }
 );
 

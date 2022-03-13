@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const CoachSchema = new Schema(
     {
-        person: { type: Schema.Types.ObjectId, ref: 'Person' },
-        team: { type: Schema.Types.ObjectId, ref: 'Team' },
+        person: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
+        team: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
     }
 );
 
