@@ -5,6 +5,11 @@ const { DateTime } = require('luxon');
 const articles = require('../cache/articles.json');
 const nhlteams = require('../cache/nhlteams.json');
 
+// format article dates
+articles.forEach(article => {
+    article.Updated = DateTime.fromISO(article.Updated).toRelative();
+});
+
 // LIVE VERSION
 // exports.index = async (req, res) => {
 //     try {
@@ -21,18 +26,14 @@ exports.index = (req, res) => {
     // Select articles to display 
     const selections = articles.slice(0, 15).filter(article => article.Team != null);
     selections.forEach(article => {
-
         // attach logo url
         nhlteams.find(team => {
             if (article.Team === team.Key) {
                 article.Logo = team.WikipediaLogoUrl;
             }
         });
-
-        // format date
-        article.Updated = DateTime.fromISO(article.Updated).toRelative();
     });
 
 
-    res.render('index', { title: 'Ice Hub' , articles: selections });
+    res.render('index', { title: 'IceHub' , articles: selections });
 }

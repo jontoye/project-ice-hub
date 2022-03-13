@@ -2,7 +2,7 @@
 
 :root {
 	--navbar-width: 250px;
-	--header-height: 200px; 
+	--header-height: 125px; 
 }
 
 * {
@@ -16,7 +16,11 @@ body {
 	font: 14px "Poppins", Helvetica, Arial, sans-serif;
 	margin-left: var(--navbar-width);
 	margin-top: calc( var(--header-height) + 25px);
+	line-height: 1.8;
+
+	background-color: rgba(175, 223, 251, 0.205);
 }
+
 
 hr {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -27,6 +31,10 @@ h2 {
 	letter-spacing: 2px;
 }
 
+.content {
+	padding: 20px 100px;
+}
+
 .sidebar {
 	position: fixed;
 	left: 0px;
@@ -35,7 +43,7 @@ h2 {
 }
 
 .section-main {
-	background-color: rgba(238, 238, 238, 0.329);
+	/* background-color: rgba(238, 238, 238, 0.329); */
 }
 
 .section-header {
@@ -48,22 +56,39 @@ h2 {
 	padding-left: 35px;
 }
 
-.section-header::after {
+.section-header .logo {
+	opacity: 0.8;
+}
+
+/* .section-header::after {
 	content: '';
 	display: block;
 	height: 2px;
 	width: 100%;
 	background-color: #555;
-}
+} */
 
 .section-main__hero {
 	background: linear-gradient(rgba(84, 107, 139, 0.7), rgba(84, 107, 139, 0.9)), url('../images/ice.jpeg');
 	background-size: cover;
 	background-position: center center;
 	color: #fff;
+	border-radius: 15px;
 }
 
 .section-main__news img {
 	width: 200px;
 	height: 200px;
+}
+
+.card {
+	border-radius: 15px;
+	border: none;
+	background-color: rgba(255, 255, 255, 0.493);
+	color: #222;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.card-text {
+	font-size: 16px;
 }
