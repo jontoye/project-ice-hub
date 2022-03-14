@@ -14,6 +14,8 @@ router.post('/login', passport.authenticate('local', {
     successRedirect: '/auth/login-success' })
 );
 
+router.get('/logout', authController.auth_logout_get);
+
 
 
 

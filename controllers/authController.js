@@ -18,6 +18,7 @@ exports.auth_register_post = (req, res) => {
     const newUser = new User({
         username: req.body.username,
         hash: hash,
+        role: req.body.role,
     });
 
     newUser.save()
@@ -37,7 +38,13 @@ exports.auth_login_get = (req, res) => {
 }
 
 // POST - attempt to login
-exports.auth_login_post = (req, res, next) => {
+exports.auth_login_post = (req, res) => {
 
         
+}
+
+// GET - logout current user
+exports.auth_logout_get = (req, res) => {
+    req.logout();
+    res.redirect('/');
 }

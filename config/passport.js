@@ -21,12 +21,12 @@ const strategy = new LocalStrategy(verifyCallback);
 // Mount
 passport.use(strategy);
 
-// Save user ID into session
+// Save user ID into Session.passport object
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-// Retrieve userID from session and look for it in database
+// Populates req.user with matched user from db
 passport.deserializeUser((userId, done) => {
     User.findById(userId)
         .then(user => {

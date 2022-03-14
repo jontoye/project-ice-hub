@@ -10,5 +10,13 @@
         <label for="current-password">Password</label>
         <input id="current-password" name="password" type="password" autocomplete="current-password" required>
     </section>
+    <section>
+        <label for="user-role">Select type of user</label>
+        <select name="role" id="user-role">
+            <option value="player">Player</option>
+            <option value="team_admin">Team Administrator (Coaches, GM's)</option>
+            <option value="league_admin">League Administrator</option>
+        </select>
+    </section>
     <button type="submit">Register</button>
 </form>
