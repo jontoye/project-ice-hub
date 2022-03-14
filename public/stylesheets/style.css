@@ -2,7 +2,7 @@
 
 :root {
 	--navbar-width: 250px;
-	--header-height: 125px; 
+	--header-height: 100px; 
 }
 
 * {
@@ -26,7 +26,7 @@ hr {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-h2 {
+h3 {
 	font-weight: 200;
 	letter-spacing: 2px;
 }
@@ -46,18 +46,27 @@ h2 {
 	/* background-color: rgba(238, 238, 238, 0.329); */
 }
 
-.section-header {
-	position: absolute;
+.main-header {
+	position: fixed;
 	left: 0;
 	top: 0;
-	right: 35px;
+	right: 0;
 	height: var(--header-height);
-	padding-top: 25px;
-	padding-left: 35px;
+	padding: 0 35px;
+	background-color: #000;
+	background-color: #02010a;
+	z-index: 1000;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .section-header .logo {
 	opacity: 0.8;
+}
+
+.home-link,
+.home-link:hover {
+	text-decoration: none;
+	color: inherit;
 }
 
 /* .section-header::after {

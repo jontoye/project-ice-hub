@@ -4,19 +4,32 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
+const session = require('express-session');
+const passport = require('passport');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 const peopleRouter = require('./routes/people');
 const arenaRouter = require('./routes/arenas');
 const leaguesRouter = require('./routes/leagues');
 const teamsRouter = require('./routes/teams');
 
+const app = express();
+
 // connect to database
 require('./config/database');
 
-const app = express();
+// setup session and passport
+app.use(session({
+	secret: process.env.secret,
+	resave: false,
+	saveUninitialized: false,
+}));
+require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // view engine setup
 app.use(expressLayouts);
@@ -29,8 +42,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 app.use('/people', peopleRouter);
 app.use('/arenas', arenaRouter);
@@ -39,18 +53,18 @@ app.use('/teams', teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error', { title: Error });
+	// render the error page
+	res.status(err.status || 500);
+	res.render('error', { title: Error });
 });
 
 module.exports = app;
