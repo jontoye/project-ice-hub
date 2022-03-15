@@ -1,6 +1,15 @@
 <p class="lead">Login page</p>
 
 <h1>Sign in</h1>
+
+<% if (errors) { %>
+    <% errors.forEach(error => { %>
+        <div class="alert alert-danger">
+            <%= error %> 
+        </div>
+    <% }) %>
+<% } %>
+
 <form action="/auth/login" method="post">
     <section>
         <label for="username">Username</label>

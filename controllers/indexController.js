@@ -35,5 +35,7 @@ exports.index = (req, res) => {
     });
 
 
-    res.render('index', { title: 'IceHub' , articles: selections });
+    res.render('index', { 
+        title: 'IceHub' , 
+        articles: selections });
 }

@@ -9,10 +9,12 @@ router.post('/register', authController.auth_register_post);
 
 router.get('/login', authController.auth_login_get);
 
-router.post('/login', passport.authenticate('local', { 
-    failureRedirect: '/auth/login-failure', 
-    successRedirect: '/auth/login-success' })
-);
+router.post('/login', passport.authenticate('local', 
+{ 
+    failureRedirect: '/auth/login', 
+    successRedirect: '/',
+    failureFlash: 'Invalid username or password', 
+}));
 
 router.get('/logout', authController.auth_logout_get);
 

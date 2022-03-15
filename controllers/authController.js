@@ -34,7 +34,10 @@ exports.auth_register_post = (req, res) => {
 
 // GET - show login page
 exports.auth_login_get = (req, res) => {
-    res.render('auth/login', { title: 'Login' });
+    res.render('auth/login', { 
+        title: 'Login',
+        errors: req.flash('error'), 
+    });
 }
 
 // POST - attempt to login

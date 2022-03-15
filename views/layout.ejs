@@ -22,42 +22,37 @@
 				<h1 class="display-3">IceHub</h1>
 			</div>
 		</a>
-		<h3 class="">Hockey League Management System</h3>
+		<div class="d-flex flex-column align-items-end">
+			<h3 class="">Hockey League Management System</h3>
+			<% if (user) { %>
+				<p class="text-muted">Logged in as <%= user.username %> </p>
+			<% } %>
+		</div>
 	</div>
 
     <div class="container">
 		<nav class="sidebar">
 			<ul class="nav flex-column">
-				<li class="nav-item">
-					<a class="nav-link lead" href="/auth/login">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="/auth/register">Register</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Leage Admin</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Team Admin</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Roster</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Schedule</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Stats</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="#">Standings</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="/auth/logout">Logout</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link lead" href="/protected">TestAuth</a>
-				</li>
+
+				<% if (!user) { %>
+					<li class="nav-item">
+						<a class="nav-link lead" href="/auth/login">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link lead" href="/auth/register">Register</a>
+					</li>
+				<% } %>
+
+				
+				<% if (user) { %>
+
+					<% if (user.role === 'league_admin') { %>
+						<%- include('partials/navLeagueAdmin.ejs') %> 
+					<% } %>
+
+					<%- include('partials/navBasic.ejs')  %> 
+
+				<% } %>
 			</ul>
 		</nav>
 		

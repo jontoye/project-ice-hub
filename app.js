@@ -6,6 +6,7 @@ const logger = require('morgan');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -41,7 +42,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
+// Sharing info between pages
+app.use((req, res, next) => {
+	res.locals.user = req.user;
+	next();
+})
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

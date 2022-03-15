@@ -37,9 +37,9 @@ h3 {
 
 .sidebar {
 	position: fixed;
-	left: 0px;
-	top: 50%;
-	transform: translateY(-50%);
+	left: 0;
+	top: var(--header-height);
+	padding: 20px;
 }
 
 .section-main {
