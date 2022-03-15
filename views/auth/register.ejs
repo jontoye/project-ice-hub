@@ -1,22 +1,64 @@
 <p class="lead">Fill out the form below to get started</p>
 
 <h1>Register</h1>
-<form action="/auth/register" method="post">
+
+<% if (errors) { %>
+    <% errors.forEach(error => { %>
+        <div class="alert alert-danger">
+            <%= error %> 
+        </div>
+    <% }) %>
+<% } %>
+
+<form id="formRegistration" action="/auth/register" method="post">
     <section>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" autocomplete="username" required autofocus>
-    </section>
-    <section>
-        <label for="current-password">Password</label>
-        <input id="current-password" name="password" type="password" autocomplete="current-password" required>
-    </section>
-    <section>
-        <label for="user-role">Select type of user</label>
-        <select name="role" id="user-role">
+        <label for="userRole">Account Type</label>
+        <select name="role" id="userRole">
             <option value="player" disabled>Player</option>
             <option value="team_admin" disabled>Team Administrator (Coaches, GM's)</option>
             <option value="league_admin">League Administrator</option>
         </select>
     </section>
+
+    <section>
+        <label for="leagueName">League Name</label>
+        <input id="leagueName" name="leagueName" type="text" required>
+    </section>
+   
+    <section>
+        <label for="commissionerName">Commisioner Name</label>
+        <input id="commissionerName" name="commissionerName" type="text" required>
+    </section>
+
+    <section>
+        <!-- <label>Conference 1 Name</label>
+        <input name="conferenceName1" type="text" required> -->
+        <label>Division 1 Name</label>
+        <input name="divisionName1" type="text" required>
+        <label>Division 2 Name</label>
+        <input name="divisionName2" type="text" required>
+    </section>
+
+    <section>
+        <!-- <label>Conference 2 Name</label>
+        <input name="conferenceName2" type="text" required> -->
+        <label>Division 3 Name</label>
+        <input name="divisionName3" type="text" required>
+        <label>Division 4 Name</label>
+        <input name="divisionName4" type="text" required>
+    </section>
+
+    <section>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required autofocus>
+    </section>
+
+    <section>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required>
+    </section>
+
+
+
     <button type="submit">Register</button>
 </form>

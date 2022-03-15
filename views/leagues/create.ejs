@@ -1,0 +1,18 @@
+<h1><%= title %> </h1>
+
+<div class="row">
+	<div class="col-6">
+		<form action="/leagues" method="POST">
+			<div class="mb-3">
+				<label for="leagueName" class="form-label">League Name</label>
+				<input type="text" class="form-control" id="leagueName" required>
+			</div>
+			<div class="mb-3">
+				<label for="commissionerName" class="form-label">Commissioner Name</label>
+				<input type="text" class="form-control" id="commissionerName" required>
+			</div>
+		
+			<input class="btn btn-primbary btn-dark" type="submit" value="Create League">
+		</form>
+	</div>
+</div>

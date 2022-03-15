@@ -1,0 +1,27 @@
+<h1>Add New Arena</h1>
+
+<% if (errors) { %>
+    <% errors.forEach(error => { %>
+        <div class="alert alert-danger">
+            <%= error %> 
+        </div>
+    <% }) %>
+<% } %>
+
+<form action="<%= leagueURL %>/arenas" method="post">
+
+    <section>
+        <label>Arena Name</label>
+        <input name="name" type="text" required>
+    </section>
+    <section>
+        <label>Capacity</label>
+        <input name="capacity" type="number" min="0" required>
+    </section>
+    <section>
+        <label>Location</label>
+        <input name="location" type="text" required>
+    </section>
+
+    <button type="submit">Add Arena</button>
+</form>

@@ -1,0 +1,32 @@
+<h1><%= user.leagueName %> Arena List</h1>
+
+<% if (arenas.length == 0) { %>
+    <p class="lead">No Arenas added yet</p>
+<% } else { %>
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Arena</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% arenas.forEach(arena => { %>
+                        <tr>
+                            <td><%= arena.name %> </td>
+                            <td><%= arena.location %> </td>
+                            <td><%= arena.capacity %> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+<% } %>

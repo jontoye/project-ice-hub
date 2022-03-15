@@ -3,8 +3,11 @@ const Schema = mongoose.Schema;
 
 const PlayerSchema = new Schema(
     {
-        person: { type: Schema.Types.ObjectId, required: true },
-        team: { type: Schema.Types.ObjectId, required: true },
+        first_name: { type: String, maxLength: 30, required: true },
+        last_name: { type: String, maxLength: 30, required: true },
+        photo_url: { type: String },
+        date_of_birth: { type: Date },
+        place_of_birth: { type: String },
         position: [{ type: String, enum: ['C', 'LW', 'RW', 'D', 'G'] }],
         jersey: { type: Number, required: true },
         goals: { type: Number, default: 0 },
@@ -17,4 +20,5 @@ const PlayerSchema = new Schema(
     }
 );
 
-module.exports = mongoose.model('Player', PlayerSchema);
+module.exports = PlayerSchema;
+// module.exports = mongoose.model('Player', PlayerSchema);

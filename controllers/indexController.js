@@ -1,3 +1,4 @@
+const League = require('../models/league');
 const axios = require('axios');
 const apiURL = 'https://api.sportsdata.io/v3/nhl/scores/json/News?key='
 const { DateTime } = require('luxon');
@@ -21,7 +22,9 @@ articles.forEach(article => {
 // }
 
 // TEST VERSION - uses caches of api data
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
+
+    let currentLeague;
 
     // Select articles to display 
     const selections = articles.slice(0, 15).filter(article => article.Team != null);
@@ -35,7 +38,9 @@ exports.index = (req, res) => {
     });
 
 
-    res.render('index', { 
-        title: 'IceHub' , 
-        articles: selections });
+    res.render('index', { title: 'Home' , articles: selections });
+
+
+
+
 }

@@ -4,9 +4,10 @@ const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema(
     {
-        username: { type: String, required: true },
+        username: { type: String, required: true, unique: true },
         hash: { type: String, required: true },
         role: { type: String, enum: ['league_admin', 'team_admin', 'player'], default: 'player' },
+        leagueID : { type: Schema.Types.ObjectId, ref: 'League' }
     }
 );
 

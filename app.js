@@ -12,7 +12,7 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const peopleRouter = require('./routes/people');
-const arenaRouter = require('./routes/arenas');
+// const arenaRouter = require('./routes/arenas');
 const leaguesRouter = require('./routes/leagues');
 const teamsRouter = require('./routes/teams');
 
@@ -44,19 +44,29 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 
+
 // Sharing info between pages
 app.use((req, res, next) => {
 	res.locals.user = req.user;
+	if (req.user) {
+		// console.log('USER: ', req.user);
+		// console.log('SESSION: ', req.session);
+		res.locals.leagueName = req.session.leagueName;
+		res.locals.leagueURL = req.session.leagueURL;
+		res.locals.league = req.session.league;
+	}
+	// console.log('USER: ', req.user);
+	// console.log('LOCALS: ', res.locals);
 	next();
 })
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
-app.use('/people', peopleRouter);
-app.use('/arenas', arenaRouter);
+// app.use('/people', peopleRouter);
+// app.use('/arenas', arenaRouter);
 app.use('/leagues', leaguesRouter);
-app.use('/teams', teamsRouter);
+// app.use('/teams', teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
