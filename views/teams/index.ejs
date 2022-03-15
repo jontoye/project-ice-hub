@@ -1,6 +1,35 @@
 <h1>Team List</h1>
-<!-- <p>Should be showing teams only for league: <%= leagueID %> </p> -->
 
 <% if (teams.length == 0) { %>
     <p class="lead">There are no teams in this leaugue yet.</p>
+<% } else { %>
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>Name</th>
+                        <th>Division</th>
+                        <th>Home Arena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% teams.forEach(team => { %>
+                        <tr>
+                            <td><%= team.name_short %> </td>
+                            <td><%= team.city + ' ' + team.name %> </td>
+                            <td><%= team.division %> </td>
+                            <td><%= team.arena.name %> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
 <% } %>
+    

@@ -6,7 +6,6 @@ exports.arenas_index_get = async (req, res) => {
 
     try {
         const league = await League.findById(req.user.leagueID).populate('arenas');
-        console.log(league.arenas);
         res.render('arenas/index', { title: 'Arena List' , arenas: league.arenas });
     } catch (err) {
         console.log(err);
@@ -17,7 +16,7 @@ exports.arenas_create_get = (req, res) => {
     res.render('arenas/new', { title: 'New Arena', errors: req.flash('error') });
 }
 
-exports.arenas_create_post = async (req, res, next) => {
+exports.arenas_create_post = async (req, res) => {
 
     try {
         const arena = await Arena.create(req.body);
