@@ -1,7 +1,7 @@
 const League = require("../models/league");
 const { Game } = require('../models/game');
 
-exports.games_index_get = async(req, res) => {
+exports.games_index_get = async (req, res) => {
 
     const games = [];
     
@@ -29,7 +29,7 @@ exports.games_index_get = async(req, res) => {
 
 }
 
-exports.games_create_get = async(req, res) => {
+exports.games_create_get = async (req, res) => {
 
     try {
         const league = await League.findById(req.user.leagueID);
@@ -39,7 +39,7 @@ exports.games_create_get = async(req, res) => {
     }
 }
 
-exports.games_create_post = async(req, res) => {
+exports.games_create_post = async (req, res) => {
 
     try {
         const league = await League.findById(req.user.leagueID);
@@ -54,4 +54,33 @@ exports.games_create_post = async(req, res) => {
         console.log(err);
     }
 
+}
+
+exports.games_update_get = async (req, res) => {
+
+    try {
+        const league = await League.findById(req.user.leagueID);
+        const game = league.schedule.id(req.params.gameID);
+    
+        res.render('games/update', { title: 'Update Game' , game });
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+exports.games_update_post = async (req, res) => {
+
+    try {
+        const league = await League.findById(req.user.leagueID);
+
+        const game = league.schedule.id(req.params.gameID);
+        game.home_team_score = req.body.home_team_score;
+        game.away_team_score = req.body.away_team_score;
+        await league.save();
+
+        res.redirect(req.session.leagueURL + '/games');
+    } catch (err) {
+
+    }
 }

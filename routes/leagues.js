@@ -31,6 +31,8 @@ router.get('/:leagueName/players/new', playerController.players_create_get);
 router.get('/:leagueName/games', gameController.games_index_get);
 router.post('/:leagueName/games', gameController.games_create_post);
 router.get('/:leagueName/games/new', gameController.games_create_get);
+router.post('/:leagueName/games/:gameID', gameController.games_update_post);
+router.get('/:leagueName/games/:gameID/update', gameController.games_update_get);
 
 router.get('/:leagueName', leagueController.league_homepage_get);
 
