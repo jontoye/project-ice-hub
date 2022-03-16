@@ -9,6 +9,7 @@ const PlayerSchema = new Schema(
         date_of_birth: { type: Date },
         place_of_birth: { type: String },
         position: [{ type: String, enum: ['C', 'LW', 'RW', 'D', 'G'] }],
+        team: { type: Schema.Types.ObjectId, ref: 'Team' },
         jersey: { type: Number, required: true },
         goals: { type: Number, default: 0 },
         assists: { type: Number, default: 0 },
@@ -20,5 +21,7 @@ const PlayerSchema = new Schema(
     }
 );
 
-module.exports = PlayerSchema;
+const Player = mongoose.model('Player', PlayerSchema);
+
+module.exports = { PlayerSchema, Player };
 // module.exports = mongoose.model('Player', PlayerSchema);

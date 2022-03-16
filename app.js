@@ -11,7 +11,6 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-const peopleRouter = require('./routes/people');
 // const arenaRouter = require('./routes/arenas');
 const leaguesRouter = require('./routes/leagues');
 const teamsRouter = require('./routes/teams');
