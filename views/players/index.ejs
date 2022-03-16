@@ -1,0 +1,43 @@
+<h1>Player List</h1>
+
+<% if (players.length == 0) { %>
+    <p class="lead">There are no players in this leaugue yet.</p>
+<% } else { %>
+
+    <div class="row">
+        <div class="col-9">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Born</th>
+                        <th>From</th>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Jersey</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% players.forEach(player => { %>
+                        <tr>
+                            <td><%= player.fullname%> </td>
+                            <td><%= player.born %> </td>
+                            <td><%= player.place_of_birth %> </td>
+                            <td>
+                                <% player.position.forEach(p => { %>
+                                    <%= p + ' ' %>
+                                <% }) %> 
+                            </td>
+                            <td><%= player.parent().fullname %> </td>
+                            <td>#<%= player.jersey %> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+<% } %>
+    

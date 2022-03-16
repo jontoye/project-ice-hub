@@ -8,7 +8,6 @@ const teamController = require('../controllers/teamController');
 const playerController = require('../controllers/playerController');
 
 // Routes
-// router.get('/new', leagueController.league_create_get);
 router.post('/', leagueController.league_create_post);
 router.get('/', leagueController.league_index);
 

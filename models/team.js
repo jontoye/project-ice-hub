@@ -18,6 +18,11 @@ const TeamSchema = new Schema(
     }
 );
 
+// virtual method for getting full team name
+TeamSchema.virtual('fullname').get(function() {
+    return this.city + ' ' + this.name;
+})
+
 const Team = mongoose.model('Team', TeamSchema);
 
 module.exports = { TeamSchema, Team };

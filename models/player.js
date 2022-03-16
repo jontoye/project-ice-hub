@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const { DateTime } = require('luxon');
 
 const PlayerSchema = new Schema(
     {
@@ -9,7 +10,7 @@ const PlayerSchema = new Schema(
         date_of_birth: { type: Date },
         place_of_birth: { type: String },
         position: [{ type: String, enum: ['C', 'LW', 'RW', 'D', 'G'] }],
-        team: { type: Schema.Types.ObjectId, ref: 'Team' },
+        // team: { type: Schema.Types.ObjectId, ref: 'Team' },
         jersey: { type: Number, required: true },
         goals: { type: Number, default: 0 },
         assists: { type: Number, default: 0 },
@@ -21,7 +22,22 @@ const PlayerSchema = new Schema(
     }
 );
 
+// virtual method for displaying fullname
+PlayerSchema.virtual('fullname').get(function() {
+    return this.first_name + ' ' + this.last_name;
+});
+
+// virtual method for formatting date of birth
+PlayerSchema.virtual('born').get(function() {
+
+    // Need to get timezone offset since date is stored in UTC
+    const timeOffset = this.date_of_birth.getTimezoneOffset()
+
+    return DateTime.fromJSDate(this.date_of_birth)
+                    .plus({ minutes: timeOffset })
+                    .toLocaleString({ month: 'long', day: 'numeric', year: 'numeric'})
+});
+
 const Player = mongoose.model('Player', PlayerSchema);
 
 module.exports = { PlayerSchema, Player };
-// module.exports = mongoose.model('Player', PlayerSchema);
