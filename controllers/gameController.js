@@ -72,14 +72,28 @@ exports.games_update_get = async (req, res) => {
 exports.games_update_post = async (req, res) => {
 
     try {
+
         const league = await League.findById(req.user.leagueID);
-
         const game = league.schedule.id(req.params.gameID);
-        game.home_team_score = req.body.home_team_score;
-        game.away_team_score = req.body.away_team_score;
-        await league.save();
 
-        res.redirect(req.session.leagueURL + '/games');
+        if (game.is_complete) {
+
+            console.log('cannot update a completed game!');
+            res.json('Cannot update a completed game!');
+
+        } else {
+            
+            game.home_team_score = req.body.home_team_score;
+            game.away_team_score = req.body.away_team_score;
+    
+            if (req.body.is_complete == 'true') {
+                game.is_complete = true;
+            }
+    
+            await league.save();
+    
+            res.redirect(req.session.leagueURL + '/games');
+        }
     } catch (err) {
 
     }

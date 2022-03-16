@@ -34,17 +34,24 @@
                             <td><%= game.parent().teams.id(game.away_team).fullname %> </td>
                             <td><%= game.away_team_score %> </td>
 
-                            <td>
-                                <a href="<%= leagueURL %>/games/<%= game._id %>/update">
-                                    <img src="/images/icon-update.png" alt="icon-update">
-                                </a>
-                            </td>
+                            <% if (game.is_complete) { %>
+                                
+                                <td>FINAL</td>
+                             
+                            <% } else {%>
 
-                            <td>
-                                <a href="<%= leagueURL %>/games/<%= game._id %>/delete">
-                                    <img src="/images/icon-delete.png" alt="icon-delete">
-                                </a>
-                            </td>
+                                <td>
+                                    <a href="<%= leagueURL %>/games/<%= game._id %>/update">
+                                        <img src="/images/icon-update.png" alt="icon-update">
+                                    </a>
+                                </td>
+    
+                                <td>
+                                    <a href="<%= leagueURL %>/games/<%= game._id %>/delete">
+                                        <img src="/images/icon-delete.png" alt="icon-delete">
+                                    </a>
+                                </td>
+                            <% } %>
                             
                         </tr>
                     <% }) %>
