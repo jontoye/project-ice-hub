@@ -1,0 +1,26 @@
+<h1>Add New Game</h1>
+
+<form action="<%= leagueURL %>/games" method="post">
+    <section>
+        <label>Home Team</label>
+        <select name="home_team" required>
+            <% teams.forEach(team => { %>
+                <option value="<%= team._id %>"><%= team.fullname %> </option>
+            <% }) %>
+        </select>
+    </section>
+    <section>
+        <label>Away Team</label>
+        <select name="away_team" required>
+            <% teams.forEach(team => { %>
+                <option value="<%= team._id %>"><%= team.fullname %> </option>
+            <% }) %>
+        </select>
+    </section>
+    <section>
+        <label>Date</label>
+        <input name="date" type="datetime-local" required>
+    </section>
+
+    <button type="submit">Add Game</button>
+</form>
