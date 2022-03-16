@@ -16,7 +16,7 @@
     </section>
     <section>
         <label for="teamArena">Home Arena</label>
-        <select name="arena" id="teamArena">
+        <select name="arena" id="teamArena" required>
             <% arenas.forEach(arena => { %>
                 <option value="<%= arena._id %>"><%= arena.name %></option>
             <% }) %>

@@ -30,7 +30,7 @@ exports.teams_create_post = async (req, res) => {
 	
     try {
         const league = await League.findById(req.user.leagueID);
-        const team = await Team.create(req.body);
+        const team = new Team(req.body);
         await league.teams.push(team);
         await league.save();
         res.redirect(req.session.leagueURL + '/teams');

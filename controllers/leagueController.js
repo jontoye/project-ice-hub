@@ -17,6 +17,5 @@ exports.league_create_post = (req, res) => {
 }
 
 exports.league_homepage_get = async (req, res) => {
-    console.log(req.params);
     res.render('index', { title: req.params.leagueName, articles: false })
 }
