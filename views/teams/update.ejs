@@ -1,0 +1,46 @@
+<h1>Update Team</h1>
+
+<h4><%= team.fullname %> </h4>
+
+<form action="<%= leagueURL %>/teams/<%= team._id %>" method="post">
+
+    <section>
+        <label for="teamCity">City/Neighbourhood</label>
+        <input id="teamCity" name="city" type="text" required value="<%= team.city %>">
+    </section>
+    <section>
+        <label for="teamName">Team Name</label>
+        <input id="teamName" name="name" type="text" required value="<%= team.name %>">
+    </section>
+    <section>
+        <label for="teamShort">Team Name Short (3 letters)</label>
+        <input id="teamShort" name="name_short" type="text" required value="<%= team.name_short %>">
+    </section>
+    <section>
+        <label for="teamArena">Home Arena</label>
+        <select name="arena" id="teamArena" required">
+            <% arenas.forEach(arena => { %>
+                <% if (arena._id.toString() == team.arena._id.toString()) { %>
+                    <option selected value="<%= arena._id %>"><%= arena.name %></option>
+                <% } else { %>
+                    <option value="<%= arena._id %>"><%= arena.name %></option>
+                <% } %>
+            <% }) %>
+        </select>
+    </section>
+
+    <section>
+        <label for="teamDivision">Division</label>
+        <select name="division" id="teamDivision">
+            <% league.division_names.forEach(division => { %>
+                <% if (division == team.division) { %>
+                    <option selected value="<%= division %>"><%= division %></option>
+                <% } else { %>
+                    <option value="<%= division %>"><%= division %></option>
+                <% } %>    
+            <% }) %>
+        </select>
+    </section>
+
+    <button type="submit">Update Team</button>
+</form>
