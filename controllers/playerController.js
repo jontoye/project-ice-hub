@@ -107,4 +107,30 @@ exports.players_update_post = async (req, res) => {
         console.log(err);
     }
 
+
+}
+
+exports.players_delete_get = async (req, res) => {
+
+    try {
+        let currentPlayer;
+
+        const league = await League.findById(req.user.leagueID);
+
+        league.teams.forEach(team => {
+            if (team.players.id(req.params.playerID)) {
+                // currentPlayer = team.players.id(req.params.playerID)
+                team.players.id(req.params.playerID).remove()
+            }
+        });
+
+        await league.save();
+        console.log('deleted player');
+
+        res.redirect(req.session.leagueURL + '/players');
+
+
+    } catch (err) {
+        console.log(err);
+    }
 }
