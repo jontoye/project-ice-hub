@@ -66,3 +66,20 @@ exports.teams_update_post = async (req, res) => {
         console.log(err);
     }
 }
+
+// exports.teams_delete_get = async (req, res) => {
+
+//     try {
+
+//         const league = await League.findById(req.user.leagueID);
+//         league.teams.id(req.params.teamID).remove();
+//         console.log('team deleted');
+
+//         league.save();
+
+//         res.redirect(req.session.leagueURL + '/teams');
+
+//     } catch (err) {
+//         console.log(err);
+//     }
+// }

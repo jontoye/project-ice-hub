@@ -23,6 +23,7 @@ router.post('/:leagueName/teams', teamController.teams_create_post);
 router.get('/:leagueName/teams/new', teamController.teams_create_get);
 router.post('/:leagueName/teams/:teamID', teamController.teams_update_post);
 router.get('/:leagueName/teams/:teamID/update', teamController.teams_update_get);
+// router.get('/:leagueName/teams/:teamID/delete', teamController.teams_delete_get);
 
 
 // Players
