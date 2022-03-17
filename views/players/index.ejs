@@ -30,6 +30,19 @@
                             </td>
                             <td><%= player.parent().fullname %> </td>
                             <td>#<%= player.jersey %> </td>
+
+                            <td>
+                                <a href="<%= leagueURL %>/players/<%= player._id %>/update">
+                                    <img src="/images/icon-update.png" alt="icon-update">
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="<%= leagueURL %>/players/<%= player._id %>/delete">
+                                    <img src="/images/icon-delete.png" alt="icon-delete">
+                                </a>
+                            </td>
+
                         </tr>
                     <% }) %>
                 </tbody>

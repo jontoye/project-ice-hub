@@ -29,6 +29,8 @@ router.get('/:leagueName/teams/:teamID/update', teamController.teams_update_get)
 router.get('/:leagueName/players', playerController.players_index_get);
 router.post('/:leagueName/players', playerController.players_create_post);
 router.get('/:leagueName/players/new', playerController.players_create_get);
+router.post('/:leagueName/players/:playerID', playerController.players_update_post);
+router.get('/:leagueName/players/:playerID/update', playerController.players_update_get);
 
 // Games
 router.get('/:leagueName/games', gameController.games_index_get);
