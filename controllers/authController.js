@@ -96,7 +96,7 @@ exports.auth_login_post = async (req, res) => {
 	req.session.leagueName = league.name;
 	req.session.leagueURL = league.url;
     req.session.league = league;
-	res.redirect(league.url);
+	res.redirect('/');
 }
 
 // GET - logout current user

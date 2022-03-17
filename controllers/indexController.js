@@ -21,26 +21,30 @@ articles.forEach(article => {
 // 	}
 // }
 
+
 // TEST VERSION - uses caches of api data
-exports.index = async (req, res) => {
+exports.index = (req, res) => {
 
-    let currentLeague;
+    let title;
+    let selections;
 
-    // Select articles to display 
-    const selections = articles.slice(0, 15).filter(article => article.Team != null);
-    selections.forEach(article => {
-        // attach logo url
-        nhlteams.find(team => {
-            if (article.Team === team.Key) {
-                article.Logo = team.WikipediaLogoUrl;
-            }
+    if (req.user) {
+        title = req.session.leagueName;
+        selections = false;
+    } else {
+        title = 'Home';
+        // Select articles to display 
+        selections = articles.slice(0, 15).filter(article => article.Team != null);
+        selections.forEach(article => {
+            // attach logo url
+            nhlteams.find(team => {
+                if (article.Team === team.Key) {
+                    article.Logo = team.WikipediaLogoUrl;
+                }
+            });
         });
-    });
-
+    }
 
     res.render('index', { title: 'Home' , articles: selections });
-
-
-
 
 }

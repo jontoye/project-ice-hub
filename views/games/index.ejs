@@ -27,11 +27,11 @@
                     <% games.forEach(game => { %>
                         <tr>
                             <td><%= game.home_team_score %> </td>
-                            <td><%= game.parent().teams.id(game.home_team).fullname %> </td>
+                            <td><%= game.home_team.fullname %> </td>
                             
                             <td><%= game.gametime %> </td>
 
-                            <td><%= game.parent().teams.id(game.away_team).fullname %> </td>
+                            <td><%= game.away_team.fullname %> </td>
                             <td><%= game.away_team_score %> </td>
 
                             <% if (game.is_complete) { %>
@@ -41,13 +41,13 @@
                             <% } else {%>
 
                                 <td>
-                                    <a href="<%= leagueURL %>/games/<%= game._id %>/update">
+                                    <a href="/games/<%= game._id %>/update">
                                         <img src="/images/icon-update.png" alt="icon-update">
                                     </a>
                                 </td>
     
                                 <td>
-                                    <a href="<%= leagueURL %>/games/<%= game._id %>/delete">
+                                    <a href="/games/<%= game._id %>/delete">
                                         <img src="/images/icon-delete.png" alt="icon-delete">
                                     </a>
                                 </td>

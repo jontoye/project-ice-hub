@@ -1,2 +1,3 @@
 cache/
 utils/seed.js
+models/icebox/*

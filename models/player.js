@@ -4,21 +4,67 @@ const { DateTime } = require('luxon');
 
 const PlayerSchema = new Schema(
     {
-        first_name: { type: String, maxLength: 30, required: true },
-        last_name: { type: String, maxLength: 30, required: true },
-        photo_url: { type: String },
-        date_of_birth: { type: Date },
-        place_of_birth: { type: String },
-        position: [{ type: String, enum: ['C', 'LW', 'RW', 'D', 'G'] }],
-        // team: { type: Schema.Types.ObjectId, ref: 'Team' },
-        jersey: { type: Number, required: true },
-        goals: { type: Number, default: 0 },
-        assists: { type: Number, default: 0 },
-        penalty_minutes: { type: Number, default: 0},
-        goalie_gaa: { type: Number, default: 0.00 },
-        goalie_sv: { type: Number, max: 1, default: 0.00 },
-        goalie_wins: { type: Number, default: 0 },
-        goalie_losses: { type: Number, default: 0 },
+        first_name: { 
+            type: String, 
+            maxLength: 30, 
+            required: true 
+        },
+        last_name: { 
+            type: String, 
+            maxLength: 30, 
+            required: true 
+        },
+        team: { 
+            type: Schema.Types.ObjectId, 
+            ref: 'Team' 
+        },
+        league: {
+            type: Schema.Types.ObjectId,
+            ref: 'League'
+        },
+        photo_url: { 
+            type: String 
+        },
+        date_of_birth: { 
+            type: Date 
+        },
+        place_of_birth: { 
+            type: String 
+        },
+        position: [{ 
+            type: String, 
+            enum: ['C', 'LW', 'RW', 'D', 'G'] 
+        }],
+        jersey: { 
+            type: Number, 
+            required: true 
+        },
+        goals: { 
+            type: Number, 
+            default: 0 
+        },
+        assists: { 
+            type: Number, 
+            default: 0 
+        },
+        penalty_minutes: { 
+            type: Number,
+            default: 0
+        },
+        goalie_gaa: { 
+            type: Number, 
+            default: 0.00 
+        },
+        goalie_sv: { 
+            type: Number, 
+            max: 1, default: 0.00 
+        },
+        goalie_wins: { 
+            type: Number, default: 0 
+        },
+        goalie_losses: { 
+            type: Number, default: 0 
+        },
     }
 );
 
@@ -38,6 +84,5 @@ PlayerSchema.virtual('born').get(function() {
                     .toLocaleString({ month: 'long', day: 'numeric', year: 'numeric'})
 });
 
-const Player = mongoose.model('Player', PlayerSchema);
+module.exports = mongoose.model('Player', PlayerSchema);
 
-module.exports = { PlayerSchema, Player };

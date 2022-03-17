@@ -1,7 +1,9 @@
 <h1><%= user.leagueName %> Arena List</h1>
 
-<% if (arenas.length == 0) { %>
-    <p class="lead">No Arenas added yet</p>
+
+<h2>My Arenas</h2>
+<% if (leagueArenas.length == 0) { %>
+    <p class="lead">No Arenas being used for this leauge yet</p>
 <% } else { %>
 
     <div class="row">
@@ -15,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% arenas.forEach(arena => { %>
+                    <% leagueArenas.forEach(arena => { %>
                         <tr>
                             <td><%= arena.name %> </td>
                             <td><%= arena.location %> </td>
@@ -27,6 +29,39 @@
         </div>
     </div>
 
+<% } %>
 
+<h2>Other Available Arenas</h2>
+<% if (allArenas.length == 0) { %>
+    <p class="lead">No Arenas added to database yet</p>
+<% } else { %>
+
+    <div class="row">
+        <div class="col-10">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Arena</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% allArenas.forEach(arena => { %>
+                        <% if (!arena.leagues.includes(leagueID)) { %>
+                            <tr>
+                                <td><%= arena.name %> </td>
+                                <td><%= arena.location %> </td>
+                                <td><%= arena.capacity %> </td>
+                                <td>
+                                    <a class="nav-link" href="/arenas/<%= arena._id %>/addLeague"><img src="images/icon-add.png" alt="icon-add" class="pe-3">Add to my league</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 <% } %>

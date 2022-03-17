@@ -11,9 +11,11 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-// const arenaRouter = require('./routes/arenas');
+const arenaRouter = require('./routes/arenas');
 const leaguesRouter = require('./routes/leagues');
 const teamsRouter = require('./routes/teams');
+const playersRouter = require('./routes/players');
+const gamesRouter = require('./routes/games');
 
 const app = express();
 
@@ -48,24 +50,23 @@ app.use(flash());
 app.use((req, res, next) => {
 	res.locals.user = req.user;
 	if (req.user) {
-		// console.log('USER: ', req.user);
-		// console.log('SESSION: ', req.session);
 		res.locals.leagueName = req.session.leagueName;
 		res.locals.leagueURL = req.session.leagueURL;
+		res.locals.leagueID = req.user.leagueID;
 		res.locals.league = req.session.league;
 	}
-	// console.log('USER: ', req.user);
-	// console.log('LOCALS: ', res.locals);
 	next();
 })
 
+// Routes
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/arenas', arenaRouter);
+// app.use('/leagues', leaguesRouter);
+app.use('/teams', teamsRouter);
+app.use('/players', playersRouter);
+app.use('/games', gamesRouter);
 
-// app.use('/people', peopleRouter);
-// app.use('/arenas', arenaRouter);
-app.use('/leagues', leaguesRouter);
-// app.use('/teams', teamsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

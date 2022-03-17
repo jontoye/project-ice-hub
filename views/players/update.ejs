@@ -1,6 +1,6 @@
 <h1>Update Player</h1>
 
-<form action="<%= leagueURL %>/players/<%= player._id %>" method="post">
+<form action="/players/<%= player._id %>" method="post">
 
     <section>
         <label>First Name</label>
@@ -10,14 +10,14 @@
         <label>Last Name</label>
         <input name="last_name" type="text" required value="<%= player.last_name %>">
     </section>
-    <section>
+    <!-- <section>
         <label>Date of Birth</label>
-        <input name="date_of_birth" type="date" value="2000-01-01" required value="<%= player.date_of_birth %>">
-    </section>
-    <section>
+        <input name="date_of_birth" type="date" required value="<%= player.date_of_birth %>">
+    </section> -->
+    <!-- <section>
         <label>Place of Birth</label>
         <input name="place_of_birth" type="text" required value="<%= player.place_of_birth %>">
-    </section>
+    </section> -->
     <section>
         <label>Position (Select all that apply)</label>
         <select name="position" multiple>

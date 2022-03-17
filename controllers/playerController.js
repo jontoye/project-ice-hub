@@ -1,136 +1,117 @@
-const { Player } = require('../models/player');
-const { Team } = require('../models/team');
+const Player = require('../models/player');
+const Team = require('../models/team');
 const League = require('../models/league');
 
 exports.players_index_get = async (req, res) => {
 
-    try {
-        const league = await League.findById(req.user.leagueID).select('teams');
-        
-        let players = [];
+    const leagueID = req.user.leagueID;
 
-        league.teams.forEach(team => {
-            team.players.forEach(player => {
-                players.push(player);
-            });
+    Player.find({ league_id: leagueID })
+        .populate('team')
+        .then(players => {
+            res.render('players/index', { title: 'Player List', players });
+        })
+        .catch(err => {
+            console.log('Error getting player list: ', err);
         });
 
-        res.render('players/index', { title: 'Player List', players });
-
-    } catch (err) {
-        console.log(err);
-    }
-
-
 }
 
-exports.players_create_get = async (req, res) => {
+exports.players_create_get = (req, res) => {
 
-    try {
-        const teams = await League.findById(req.user.leagueID).select('teams');
-        res.render('players/new', { title: 'New Player' , teams: teams.teams });
-    } catch (err) {
-        console.log(err);
-    }
+    const leagueID = req.user.leagueID;
 
-
-}
-
-exports.players_create_post = async (req, res) => {
-
-    try {
-        const league = await League.findById(req.user.leagueID)
-
-        const team = league.teams.id(req.body.team);
-
-        const player = new Player(req.body);
-        await team.players.push(player);
-        await league.save();
-        res.redirect(req.session.leagueURL + '/players');
-
-    } catch(err) {
-        console.log(err);
-    }
-}
-
-exports.players_update_get = async (req, res) => {
-
-    try {
-
-        let currentPlayer;
-        const league = await League.findById(req.user.leagueID);
-
-        league.teams.forEach(team => {
-            if (team.players.id(req.params.playerID)) {
-                currentPlayer = team.players.id(req.params.playerID)
-            }
+    Team.find({ league_id: leagueID })
+        .then(teams => {
+            res.render('players/new', { title: 'New Player' , teams });
+        })
+        .catch(err => {
+            console.log('Error getting new player form: ', err);
         });
 
-        res.render('players/update', { title: 'Update Player' , teams: league.teams, player: currentPlayer });
-    } catch (err) {
-        console.log(err);
-    }
+}
+
+exports.players_create_post = (req, res) => {
+
+    const leagueID = req.user.leagueID;
+    req.body.league = leagueID;
+
+    const newPlayer = new Player(req.body);
+
+    newPlayer.save()
+        .then(player => {
+            Team.findByIdAndUpdate(req.body.team, 
+                { $push: { players: player._id }})
+                .then(() => {
+                    res.redirect('/players');
+                });
+        })
+        .catch(err => {
+            console.log('Error creating new player: ', err);
+        });
+
+}
+
+exports.players_update_get = (req, res) => {
+
+    const leagueID = req.user.leagueID;
+    const playerID = req.params.playerID;
+
+    const fetchTeams = Team.find({ league_id: leagueID });
+    const fetchPlayer = Player.findById(playerID);
+
+    Promise.all([
+        fetchTeams.exec(),
+        fetchPlayer.exec()
+    ])
+    .then(([teams, player]) => {
+        res.render('players/update', { title: 'Update Player', teams, player });
+    })
+    .catch(err => {
+        console.log('Error getting player update form: ', err);
+    });
+
 }
 
 exports.players_update_post = async (req, res) => {
 
     // TODO: allow user to move players between teams
 
-    try {
+    const leagueID = req.user.leagueID;
+    const playerID = req.params.playerID;
 
-        let currentPlayer;
-        const league = await League.findById(req.user.leagueID);
-
-        league.teams.forEach(team => {
-            if (team.players.id(req.params.playerID)) {
-                currentPlayer = team.players.id(req.params.playerID)
-            }
+    Player.findByIdAndUpdate(playerID, req.body)
+        .then(() => {
+            res.redirect('/players');
+        })
+        .catch(err => {
+            console.log('Error updating player: ', err);
         });
-
-        currentPlayer.first_name = req.body.first_name;
-        currentPlayer.last_name = req.body.last_name;
-        currentPlayer.date_of_birth = req.body.date_of_birth;
-        currentPlayer.place_of_birth = req.body.place_of_birth;
-        currentPlayer.jersey = req.body.jersey;
-        
-        // remove existing positions and replace with new
-        currentPlayer.position = [];
-        [...req.body.position].forEach(pos => {
-            currentPlayer.position.push(pos);
-        });
-
-        league.save();
-
-        res.redirect(req.session.leagueURL + '/players');
-
-    } catch (err) {
-        console.log(err);
-    }
-
 
 }
 
+// TODO: 
 exports.players_delete_get = async (req, res) => {
 
-    try {
-        let currentPlayer;
+//     try {
+//         let currentPlayer;
 
-        const league = await League.findById(req.user.leagueID);
+//         const league = await League.findById(req.user.leagueID);
 
-        league.teams.forEach(team => {
-            if (team.players.id(req.params.playerID)) {
-                // currentPlayer = team.players.id(req.params.playerID)
-                team.players.id(req.params.playerID).remove()
-            }
-        });
+//         league.teams.forEach(team => {
+//             if (team.players.id(req.params.playerID)) {
+//                 // currentPlayer = team.players.id(req.params.playerID)
+//                 team.players.id(req.params.playerID).remove()
+//             }
+//         });
 
-        await league.save();
-        console.log('deleted player');
+//         await league.save();
+//         console.log('deleted player');
 
-        res.redirect(req.session.leagueURL + '/players');
+//         res.redirect(req.session.leagueURL + '/players');
 
 
-    } catch (err) {
-        console.log(err);
-    }
+//     } catch (err) {
+//         console.log(err);
+//     }
 }

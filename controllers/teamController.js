@@ -1,72 +1,94 @@
 const League = require('../models/league');
-const { Team } = require('../models/team');
+const Arena = require('../models/arena.js');
+const Team = require('../models/team');
 
-exports.teams_index_get = async (req, res) => {
-    const league = await League.findById(req.user.leagueID).populate('teams.arena');
-    res.render('teams/index', { title: 'Team List', teams: league.teams });
+exports.teams_index_get = (req, res) => {
+
+    const leagueID = req.user.leagueID;
+
+    Team.find({ league_id: leagueID })
+        .populate('arena')
+        .then(teams => {
+            res.render('teams/index', { title: 'Team List', teams });
+        })
+        .catch(err => {
+            console.log('Error getting team list: ', err);
+        });
+
 }
 
 exports.teams_create_get = async (req, res) => {
 
-    try {
+    const leagueID = req.user.leagueID;
 
-        const league = await League.findById(req.user.leagueID).populate('arenas');
-        res.render('teams/new', { title: 'New Team', arenas: league.arenas });
-
-    } catch(err) {
-        console.log(err);
-    }
-
+    Arena.find({ leagues: leagueID })
+        .then(arenas => {
+            res.render('teams/new', { title: 'New Team', arenas });
+        })
+        .catch(err => {
+            console.log('Error getting league arenas: ', err);
+        });
 
 }
 
-exports.teams_create_post = async (req, res) => {
-	
-    try {
+exports.teams_create_post = (req, res) => {
 
-        const league = await League.findById(req.user.leagueID);
-        const team = new Team(req.body);
-        await league.teams.push(team);
-        await league.save();
-        res.redirect(req.session.leagueURL + '/teams');
+    const leagueID = req.user.leagueID;
+    req.body.league_id = leagueID;
 
-    } catch(err) {
-        console.log(err);
-    }
+    const newTeam = new Team(req.body);
+
+    newTeam.save()
+        .then(team => {
+            League.findByIdAndUpdate(leagueID, 
+                { $push: { teams: team._id }})
+                .then(() => {
+                    res.redirect('/teams');
+                });
+        })
+        .catch(err => {
+            console.log('Error creating new team: ', err);
+        });
+  
 }
 
 exports.teams_update_get = async (req, res) => {
 
-    try {
+    const leagueID = req.user.leagueID;
+    const teamID = req.params.teamID;
 
-        const league = await League.findById(req.user.leagueID).populate('arenas');
-        res.render('teams/update', { title: 'Update Team', team: league.teams.id(req.params.teamID), arenas: league.arenas });
+    const fetchArenas = Arena.find({ league_id: leagueID });
+    const fetchTeam = Team.findById(teamID);
 
-    } catch (err) {
-        console.log(err);
-    }
+    Promise.all([
+        fetchArenas.exec(),
+        fetchTeam.exec()
+    ])
+    .then(([arenas, team]) => {
+        res.render('teams/update', { title: 'Update Team', team, arenas });
+    })
+    .catch(err => {
+        console.log('Error getting team update page: ', err);
+    });
+    
 }
 
 exports.teams_update_post = async (req, res) => {
 
-    try {
-        
-        const league = await League.findById(req.user.leagueID);
-        const team = league.teams.id(req.params.teamID);
-        
-        team.city = req.body.city;
-        team.name = req.body.name;
-        team.name_short = req.body.name_short;
-        team.arena = req.body.arena;
-        team.division = req.body.division;
-        await league.save();
-        res.redirect(req.session.leagueURL + '/teams');
 
-    } catch(err) {
-        console.log(err);
-    }
+    const teamID = req.params.teamID;
+
+    Team.findByIdAndUpdate(teamID, req.body)
+        .then(() => {
+            res.redirect('/teams');
+        })
+        .catch(err => {
+            console.log('Error updating team: ', err);
+        });
+
 }
 
+// TODO:
 // exports.teams_delete_get = async (req, res) => {
 
 //     try {
