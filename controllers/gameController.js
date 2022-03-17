@@ -54,7 +54,7 @@ exports.games_create_post = async (req, res) => {
 
 }
 
-exports.games_update_get = async (req, res) => {
+exports.games_update_get = (req, res) => {
 
     Game.findById(req.params.gameID)
         .populate('home_team')
@@ -66,44 +66,27 @@ exports.games_update_get = async (req, res) => {
             console.log('Error getting update game form: ', err);
         });
 
-
-    // try {
-    //     const league = await League.findById(req.user.leagueID);
-    //     const game = league.schedule.id(req.params.gameID);
-    
-    //     res.render('games/update', { title: 'Update Game' , game });
-
-    // } catch (err) {
-    //     console.log(err);
-    // }
 }
 
-exports.games_update_post = async (req, res) => {
+exports.games_update_post = (req, res) => {
 
-    try {
+    const gameID = req.params.gameID;
 
-        const league = await League.findById(req.user.leagueID);
-        const game = league.schedule.id(req.params.gameID);
+    Game.findByIdAndUpdate(gameID, req.body)
+        .then(() => {
+            res.redirect('/games');
+        })
+        .catch(err => {
+            console.log('Error updating game: ', err);
+        });
 
-        if (game.is_complete) {
+}
 
-            console.log('cannot update a completed game!');
-            res.json('Cannot update a completed game!');
+exports.games_delete_get = (req, res) => {
+    const gameID = req.params.gameID;
 
-        } else {
-            
-            game.home_team_score = req.body.home_team_score;
-            game.away_team_score = req.body.away_team_score;
-    
-            if (req.body.is_complete == 'true') {
-                game.is_complete = true;
-            }
-    
-            await league.save();
-    
-            res.redirect(req.session.leagueURL + '/games');
-        }
-    } catch (err) {
+    Game.findByIdAndDelete(gameID)
+        .then(() => res.redirect('/games'))
+        .catch(err => console.log('Error deleting game: ', err));
 
-    }
 }
