@@ -1,13 +1,13 @@
-<h1>League Schedule</h1>
+<h1 class="text-center display-6 mb-5">League Schedule</h1>
 
 <% if (games.length == 0) { %>
     <p class="lead">There are no games yet.</p>
 <% } else { %>
 
-    <div class="row">
-        <div class="col-9">
-            <table class="table">
-                <thead>
+    <div class="row text-center justify-content-center">
+        <div class="col-10">
+            <table class="table table-striped border fs-6">
+                <thead class="bg-dark text-light">
                     <tr>
                         <th>Score</th>
                         <th>Home</th>
@@ -19,6 +19,7 @@
 
                         <th></th>
                         <th></th>
+                        
 
                     </tr>
                 </thead>
@@ -26,17 +27,18 @@
                 <tbody>
                     <% games.forEach(game => { %>
                         <tr>
-                            <td><%= game.home_team_score %> </td>
+                            <td class="fs-4 text-bold text-center"><%= game.home_team_score %> </td>
                             <td><%= game.home_team.fullname %> </td>
                             
-                            <td><%= game.gametime %> </td>
+                            <td class="text-muted"><%= game.gametime %> </td>
 
                             <td><%= game.away_team.fullname %> </td>
-                            <td><%= game.away_team_score %> </td>
+                            <td class="fs-4 text-bold text-center"><%= game.away_team_score %> </td>
 
                             <% if (game.is_complete) { %>
                                 
                                 <td>FINAL</td>
+                                <td></td>
                              
                             <% } else {%>
 
@@ -51,6 +53,7 @@
                                         <img src="/images/icon-delete.png" alt="icon-delete">
                                     </a>
                                 </td>
+                                
                             <% } %>
                             
                         </tr>

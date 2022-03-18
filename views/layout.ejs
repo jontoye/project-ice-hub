@@ -26,6 +26,7 @@
 			<% if (user) { %>
 				<h3><%= leagueName %> </h3>
 				<p class="text-muted">Logged in as <%= user.username %> </p>
+				<a class="btn btn-secondary btn-light" href="/auth/logout">Logout</a>
 			<% } else { %>
 				<h3 class="">Hockey League Management System</h3>
 			<% } %>	
@@ -38,10 +39,10 @@
 
 				<% if (!user) { %>
 					<li class="nav-item">
-						<a class="nav-link lead" href="/auth/login">Login</a>
+						<a class="nav-link lead text-dark fs-4" href="/auth/login">Login</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link lead" href="/auth/register">Register</a>
+						<a class="nav-link lead text-dark fs-4" href="/auth/register">Register</a>
 					</li>
 				<% } %>
 

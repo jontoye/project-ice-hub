@@ -1,52 +1,49 @@
-<h1>Update Player</h1>
+<h1 class="text-center display-6 mb-5">Update Player</h1>
 
-<form action="/players/<%= player._id %>" method="post">
+<div class="row justify-content-center">
+    <div class="col-6">
+        <form action="/players/<%= player._id %>" method="post">
 
-    <section>
-        <label>First Name</label>
-        <input name="first_name" type="text" required value="<%= player.first_name %>">
-    </section>
-    <section>
-        <label>Last Name</label>
-        <input name="last_name" type="text" required value="<%= player.last_name %>">
-    </section>
-    <!-- <section>
-        <label>Date of Birth</label>
-        <input name="date_of_birth" type="date" required value="<%= player.date_of_birth %>">
-    </section> -->
-    <!-- <section>
-        <label>Place of Birth</label>
-        <input name="place_of_birth" type="text" required value="<%= player.place_of_birth %>">
-    </section> -->
-    <section>
-        <label>Position (Select all that apply)</label>
-        <select name="position" multiple>
-            
-            <% const options = ["C", "LW", "RW", "D", "G"]; %>
-                <% for (let i = 0; i < options.length; i ++) { %> 
-                <% let selected = player.position.includes(options[i]) ? 'selected' : ''; %>
-            <option value="<%= options[i] %>" <%= selected %>><%= options[i] %></option>
-            <% } %> 
-
-        </select>
-    </section>
-
-    <section>
-        <label>Jersey Number</label>
-        <input name="jersey" type="number" min="1" max="99" value="<%= player.jersey %>">
-    </section>
-    <!-- <section>
-        <label>Team</label>
-        <select name="team">
-            <% teams.forEach(team => { %>
-                <% if (team._id == player.parent().id) { %>
-                    <option selected value="<%= team._id %>"><%= team.city + ' ' + team.name %> </option>
-                <% } else { %>
-                    <option value="<%= team._id %>"><%= team.city + ' ' + team.name %> </option>
-                <% } %>
-            <% }) %>
-        </select>
-    </section> -->
-
-    <button type="submit">Update Player</button>
-</form>
+            <div>
+                <label class="form-label">First Name</label>
+                <input class="form-control" name="first_name" type="text" required value="<%= player.first_name %>">
+            </div>
+            <div>
+                <label class="form-label">Last Name</label>
+                <input class="form-control" name="last_name" type="text" required value="<%= player.last_name %>">
+            </div>
+        
+            <div>
+                <label class="form-label">Position (Select all that apply)</label>
+                <select class="form-select" name="position" multiple>
+                    
+                    <% const options = ["C", "LW", "RW", "D", "G"]; %>
+                        <% for (let i = 0; i < options.length; i ++) { %> 
+                        <% let selected = player.position.includes(options[i]) ? 'selected' : ''; %>
+                    <option value="<%= options[i] %>" <%= selected %>><%= options[i] %></option>
+                    <% } %> 
+        
+                </select>
+            </div>
+        
+            <div>
+                <label class="form-label">Jersey Number</label>
+                <input class="form-control" name="jersey" type="number" min="1" max="99" value="<%= player.jersey %>">
+            </div>
+            <!-- <div>
+                <label class="form-label">Team</label>
+                <select class="form-select" name="team">
+                    <% teams.forEach(team => { %>
+                        <% if (team._id == player.parent().id) { %>
+                            <option selected value="<%= team._id %>"><%= team.city + ' ' + team.name %> </option>
+                        <% } else { %>
+                            <option value="<%= team._id %>"><%= team.city + ' ' + team.name %> </option>
+                        <% } %>
+                    <% }) %>
+                </select>
+            </div> -->
+        
+            <button class="btn btn-primary btn-dark my-3" type="submit">Update Player</button>
+        </form>
+    </div>
+</div>

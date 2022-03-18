@@ -1,6 +1,6 @@
-<p class="lead">Fill out the form below to get started</p>
+<h1 class="display-6 mb-3 text-center">Register</h1>
+<p class="lead text-center">Fill out the form below to get started</p>
 
-<h1>Register</h1>
 
 <% if (errors) { %>
     <% errors.forEach(error => { %>
@@ -10,55 +10,63 @@
     <% }) %>
 <% } %>
 
-<form id="formRegistration" action="/auth/register" method="post">
-    <section>
-        <label for="userRole">Account Type</label>
-        <select name="role" id="userRole">
-            <option value="player" disabled>Player</option>
-            <option value="team_admin" disabled>Team Administrator (Coaches, GM's)</option>
-            <option value="league_admin">League Administrator</option>
-        </select>
-    </section>
-
-    <section>
-        <label for="leagueName">League Name</label>
-        <input id="leagueName" name="leagueName" type="text" required>
-    </section>
-   
-    <section>
-        <label for="commissionerName">Commisioner Name</label>
-        <input id="commissionerName" name="commissionerName" type="text" required>
-    </section>
-
-    <section>
-        <!-- <label>Conference 1 Name</label>
-        <input name="conferenceName1" type="text" required> -->
-        <label>Division 1 Name</label>
-        <input name="divisionName1" type="text" required>
-        <label>Division 2 Name</label>
-        <input name="divisionName2" type="text" required>
-    </section>
-
-    <section>
-        <!-- <label>Conference 2 Name</label>
-        <input name="conferenceName2" type="text" required> -->
-        <label>Division 3 Name</label>
-        <input name="divisionName3" type="text" required>
-        <label>Division 4 Name</label>
-        <input name="divisionName4" type="text" required>
-    </section>
-
-    <section>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" required autofocus>
-    </section>
-
-    <section>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" required>
-    </section>
-
-
-
-    <button type="submit">Register</button>
-</form>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <form id="formRegistration" action="/auth/register" method="post">
+            <div>
+                <label class="form-label" for="userRole">Account Type</label>
+                <select class="form-select" name="role" id="userRole">
+                    <option value="player" disabled>Player</option>
+                    <option value="team_admin" disabled>Team Administrator (Coaches, GM's)</option>
+                    <option value="league_admin">League Administrator</option>
+                </select>
+            </div>
+        
+            <div>
+                <label class="form-label" for="leagueName">League Name</label>
+                <input class="form-control" id="leagueName" name="leagueName" type="text" required>
+            </div>
+           
+            <div>
+                <label class="form-label" for="commissionerName">Commisioner Name</label>
+                <input class="form-control" id="commissionerName" name="commissionerName" type="text" required>
+            </div>
+        
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Division 1 Name</label>
+                    <input class="form-control" name="divisionName1" type="text" required>
+                </div>
+                <div class="col">
+                    <label class="form-label">Division 2 Name</label>
+                    <input class="form-control" name="divisionName2" type="text" required>
+                </div>
+            </div>
+        
+            <div class="row mb-5">
+                <div class="col">
+                    <label class="form-label">Division 3 Name</label>
+                    <input class="form-control" name="divisionName3" type="text" required>
+                </div>
+                <div class="col">
+                    <label class="form-label">Division 4 Name</label>
+                    <input class="form-control" name="divisionName4" type="text" required>
+                </div>
+            </div>
+        
+            <div>
+                <label class="form-label" for="username">Username</label>
+                <input class="form-control" id="username" name="username" type="text" required autofocus>
+            </div>
+        
+            <div>
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" id="password" name="password" type="password" required>
+            </div>
+        
+        
+        
+            <button class="btn btn-primary btn-dark my-3" type="submit">Register</button>
+        </form>
+    </div>
+</div>

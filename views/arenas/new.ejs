@@ -1,4 +1,4 @@
-<h1>Add New Arena</h1>
+<h1 class="display-6 mb-5 text-center">Add New Arena</h1>
 
 <% if (errors) { %>
     <% errors.forEach(error => { %>
@@ -8,20 +8,24 @@
     <% }) %>
 <% } %>
 
-<form action="/arenas" method="post">
+<div class="row justify-content-center">
+    <div class="col-6">
+        <form action="/arenas" method="post">
 
-    <section>
-        <label>Arena Name</label>
-        <input name="name" type="text" required>
-    </section>
-    <section>
-        <label>Capacity</label>
-        <input name="capacity" type="number" min="0" required>
-    </section>
-    <section>
-        <label>Location</label>
-        <input name="location" type="text" required>
-    </section>
-
-    <button type="submit">Add Arena</button>
-</form>
+            <div>
+                <label class="form-label">Arena Name</label>
+                <input class="form-control" name="name" type="text" required>
+            </div>
+            <div>
+                <label class="form-label">Capacity</label>
+                <input class="form-control" name="capacity" type="number" min="0" required>
+            </div>
+            <div>
+                <label class="form-label">Location</label>
+                <input class="form-control" name="location" type="text" required>
+            </div>
+        
+            <button class="btn btn-primary btn-dark my-3" type="submit">Add Arena</button>
+        </form>
+    </div>
+</div>

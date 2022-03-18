@@ -15,11 +15,3 @@ router.get('/:leagueName', leagueController.league_homepage_get);
 
 module.exports = router;
 
-
-
-/*
-/:leagueID/standings
-/:leagueID/schedule
-/:leagueID/stats
-
-*/

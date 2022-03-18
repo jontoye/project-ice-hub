@@ -1,39 +1,43 @@
-<h1>Update Game</h1>
+<h1 class="display-6 mb-5 text-center">Update Game</h1>
 
-<h4><%= game.home_team.fullname %> vs. <%= game.away_team.fullname %>  </h4>
-<h5><%= game.gametime %> </h5>
+<h4 class="text-center"><%= game.home_team.fullname %> vs. <%= game.away_team.fullname %>  </h4>
+<h5 class="text-center mb-5"><%= game.gametime %> </h5>
 
+<div class="row justify-content-center">
+    <div class="col-6">
+        <form action="/games/<%= game._id %> " method="post" class="fs-5">
 
-<form action="/games/<%= game._id %> " method="post" class="col-4">
-    <div class="row">
-        <div class="col">
-            <label class="form-label"><%= game.home_team.city %> </label>
-        </div>
-        <div class="col-3">
-            <input name="home_team_score" type="number" class="form-control" value="<%= game.home_team_score %>" min="0">
-        </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label"><%= game.home_team.city %> </label>
+                </div>
+                <div class="col">
+                    <input name="home_team_score" type="number" class="form-control" value="<%= game.home_team_score %>" min="0">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col">
+                    <label class="form-label"><%= game.away_team.city %></label>
+                </div>
+                <div class="col">
+                    <input name="away_team_score" type="number" class="form-control" value="<%= game.away_team_score %>" min="0">
+                </div>
+            </div>
+        
+            <!-- <div>
+                <a href="" class="btn btn-secondary">Add Goal</a>
+            </div> -->
+        
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="true" id="isFinal" name="is_complete">
+                <label class="form-check-label" for="isFinal">
+                  Mark as Final
+                </label>
+            </div>
+        
+            <button class="btn btn-primary btn-dark my-3" type="submit">Update Game</button>
+        
+        </form>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <label class="form-label"><%= game.away_team.city %></label>
-        </div>
-        <div class="col-3">
-            <input name="away_team_score" type="number" class="form-control" value="<%= game.away_team_score %>" min="0">
-        </div>
-    </div>
-
-    <!-- <div>
-        <a href="" class="btn btn-secondary">Add Goal</a>
-    </div> -->
-
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="true" id="isFinal" name="is_complete">
-        <label class="form-check-label" for="isFinal">
-          Mark as Final
-        </label>
-      </div>
-
-    <button class="btn btn-primary" type="submit">Update Game</button>
-
-</form>
+</div>

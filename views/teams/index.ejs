@@ -1,47 +1,51 @@
-<h1>Team List</h1>
 
-<% if (teams.length == 0) { %>
-    <p class="lead">There are no teams in this leaugue yet.</p>
-<% } else { %>
+    <h1 class="display-6 mb-5 text-center">Team List</h1>
 
-    <div class="row">
-        <div class="col-6">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Team</th>
-                        <th>Name</th>
-                        <th>Division</th>
-                        <th>Home Arena</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% teams.forEach(team => { %>
+    <% if (teams.length == 0) { %>
+        <p class="lead">There are no teams in this leaugue yet.</p>
+    <% } else { %>
+
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped border fs-6">
+                    <thead class="bg-dark text-light">
                         <tr>
-                            <td><%= team.name_short %> </td>
-                            <td><%= team.city + ' ' + team.name %> </td>
-                            <td><%= team.division %> </td>
-                            <td><%= team.arena.name %> </td>
-
-                            <td>
-                                <a href="/teams/<%= team._id %>/update">
-                                    <img src="/images/icon-update.png" alt="icon-update">
-                                </a>
-                            </td>
-
-                            <td>
-                                <a href="/teams/<%= team._id %>/delete">
-                                    <img src="/images/icon-delete.png" alt="icon-delete">
-                                </a>
-                            </td>
+                            <th>Team</th>
+                            <th>Name</th>
+                            <th>Division</th>
+                            <th>Home Arena</th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    <% }) %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% teams.forEach(team => { %>
+                            <tr>
+                                <td class="fw-bold"><%= team.name_short %> </td>
+                                <td><%= team.city + ' ' + team.name %> </td>
+                                <td><%= team.division %> </td>
+                                <td><%= team.arena.name %> </td>
+
+                                <td>
+                                    <a href="/teams/<%= team._id %>/update">
+                                        <img src="/images/icon-update.png" alt="icon-update">
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="/teams/<%= team._id %>/delete">
+                                        <img src="/images/icon-delete.png" alt="icon-delete">
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
 
 
-<% } %>
+    <% } %>
+
     

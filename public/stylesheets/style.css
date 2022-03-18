@@ -2,7 +2,7 @@
 
 :root {
 	--navbar-width: 250px;
-	--header-height: 100px; 
+	--header-height: 150px; 
 }
 
 * {
@@ -11,8 +11,9 @@
 	box-sizing: border-box;
 }
 
+
 body {
-	padding: 0 50px;
+	padding: 50px;
 	font: 14px "Poppins", Helvetica, Arial, sans-serif;
 	margin-left: var(--navbar-width);
 	margin-top: calc( var(--header-height) + 25px);
