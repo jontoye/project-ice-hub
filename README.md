@@ -1,13 +1,11 @@
 # IceHub - Hockey League Management System
 
 A simple tool for managing all your league data.<br>
-[View site here](https://ice-hub.herokuapp.com/)
-
 <br>
+[View site here](https://ice-hub.herokuapp.com/)
 
 
 ## Getting Started
-<hr>
 Register your league by submitting the necessary data on the registration page. Once an account has been created you are able to add arenas, teams, player info and games to your league as needed. 
 <br><br>
 The homepage of every league site displays current league events, player spotlight, and latest news from the NHL.
@@ -15,7 +13,6 @@ The homepage of every league site displays current league events, player spotlig
 <br>
 
 ## Technologies Used
-<hr>
 <ul>
     <li>CSS</li>
     <li>Express.js</li>
@@ -26,7 +23,6 @@ The homepage of every league site displays current league events, player spotlig
 <br>
 
 ## Coming Soon...
-<hr>
 <ul>
     <li>League stats page</li>
     <li>League standings page</li>
@@ -38,7 +34,6 @@ The homepage of every league site displays current league events, player spotlig
 
 
 ## Screenshots
-<hr>
 
 #### Player List
 <img src="./screenshots/player-list.png">
