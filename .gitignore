@@ -1,3 +1,4 @@
-cache/
+cache/articles.json
+cache/getArticles.js
 utils/seed*
 models/icebox/*
