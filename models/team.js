@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const TeamSchema = new Schema(
     {
+        nhlID: Number,
         league_id: {
             type: Schema.Types.ObjectId,
             ref: 'League'
@@ -19,7 +20,7 @@ const TeamSchema = new Schema(
         },
         name_short: { 
             type: String, 
-            minLength: 3, 
+            minLength: 2, 
             maxLength: 3, 
             requried: true 
         },

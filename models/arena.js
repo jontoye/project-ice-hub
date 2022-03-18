@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const ArenaSchema = new Schema(
     {
+        nhlID: Number,
         name: { 
             type: String, 
             maxLength: 50, 
