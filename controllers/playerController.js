@@ -2,11 +2,11 @@ const Player = require('../models/player');
 const Team = require('../models/team');
 const League = require('../models/league');
 
-exports.players_index_get = async (req, res) => {
+exports.players_index_get = (req, res) => {
 
     const leagueID = req.user.leagueID;
 
-    Player.find({ league_id: leagueID })
+    Player.find({ league: leagueID })
         .populate('team')
         .then(players => {
             res.render('players/index', { title: 'Player List', players });
