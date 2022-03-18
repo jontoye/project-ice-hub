@@ -9,6 +9,7 @@
             <table class="table table-striped border fs-6">
                 <thead class="bg-dark text-light">
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th>Born</th>
                         <th>From</th>
@@ -22,6 +23,9 @@
                 <tbody>
                     <% players.forEach(player => { %>
                         <tr>
+                            <% if (player.photo_url) { %>
+                                <td><img src="<%= player.photo_url %>" alt="player-photo"></td>
+                            <% } %>
                             <td><%= player.fullname%> </td>
                             <td><%= player.born %> </td>
                             <td><%= player.place_of_birth %> </td>
@@ -30,7 +34,7 @@
                                     <%= p + ' ' %>
                                 <% }) %> 
                             </td>
-                            <td><%= player.parent().fullname %> </td>
+                            <td><%= player.team.fullname %> </td>
                             <td>#<%= player.jersey %> </td>
 
                             <td>
